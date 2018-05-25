@@ -65,8 +65,8 @@ fi
 
 KEY_NAME="ssl"
 
-KEY_PATH="/etc/nginx/ssl.key"
-CRT_PATH="/etc/nginx/ssl.crt"
+KEY_PATH="/etc/nginx/secrets/ssl.key"
+CRT_PATH="/etc/nginx/secrets/ssl.crt"
 CSR_PATH="/ssl.csr"
 
 openssl req -new -newkey rsa:2048 -nodes -keyout ${KEY_PATH} -out ${CSR_PATH} \
