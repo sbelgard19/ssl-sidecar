@@ -1,0 +1,53 @@
+location: westus
+name: app-with-ssl
+properties:
+  containers:
+  - name: ssl-sidecar
+    properties:
+      environmentVariables:
+      - name: UPSTREAM_PORT
+        value: 8080
+      - name: SELF_SIGN
+        value: "true"
+      - name: DOMAIN
+        value: "www.example.com"
+      - name: COUNTRY
+        value: "US"
+      - name: STATE
+        value: "Washington"
+      - name: LOCALITY
+        value: "Seattle"
+      - name: ORGANIZATION
+        value: "Microsoft"
+      - name: ORGANIZATIONAL_UNIT
+        value: "Azure"
+      image: pskreter/ssl-sidecar:latest
+      ports:
+      - port: 443
+        protocol: TCP
+      - port: 80
+        protocol: TCP
+      resources:
+        requests:
+          cpu: 1.0
+          memoryInGB: 1.5
+  - name: app
+    properties:
+      image: pskreter/coffeeshop
+      ports:
+      - port: 8080
+        protocol: TCP
+      resources:
+        requests:
+          cpu: 1.0
+          memoryInGB: 1.5
+  ipAddress:
+    ports:
+    - port: 443
+      protocol: TCP
+    - port: 80
+      protocol: TCP
+    type: Public
+  osType: Linux
+tags: null
+type: Microsoft.ContainerInstance/containerGroups
