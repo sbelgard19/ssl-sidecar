@@ -21,7 +21,7 @@ properties:
         value: "Microsoft"
       - name: ORGANIZATIONAL_UNIT
         value: "Azure"
-      image: pskreter/ssl-sidecar:latest
+      image: ssl-sidecar:v1
       ports:
       - port: 443
         protocol: TCP
@@ -33,7 +33,7 @@ properties:
           memoryInGB: 1.5
   - name: app
     properties:
-      image: pskreter/coffeeshop
+      image: jagger:14May
       ports:
       - port: 8080
         protocol: TCP
